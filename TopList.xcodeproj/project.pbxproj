@@ -13,6 +13,7 @@
 		91663B1125354EE500B3ADD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91663B0F25354EE500B3ADD0 /* LaunchScreen.storyboard */; };
 		91663B1C25354EE500B3ADD0 /* TopListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91663B1B25354EE500B3ADD0 /* TopListTests.swift */; };
 		91663B272535512700B3ADD0 /* TypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91663B262535512700B3ADD0 /* TypeSelectionViewController.swift */; };
+		91663B29253557E900B3ADD0 /* TypeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91663B28253557E900B3ADD0 /* TypeSelectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		91663B1B25354EE500B3ADD0 /* TopListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListTests.swift; sourceTree = "<group>"; };
 		91663B1D25354EE500B3ADD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91663B262535512700B3ADD0 /* TypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectionViewController.swift; sourceTree = "<group>"; };
+		91663B28253557E900B3ADD0 /* TypeSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				91663B0425354EE300B3ADD0 /* AppDelegate.swift */,
 				91663B0625354EE300B3ADD0 /* SceneDelegate.swift */,
 				91663B262535512700B3ADD0 /* TypeSelectionViewController.swift */,
+				91663B28253557E900B3ADD0 /* TypeSelectionViewModel.swift */,
 				91663B0D25354EE500B3ADD0 /* Assets.xcassets */,
 				91663B0F25354EE500B3ADD0 /* LaunchScreen.storyboard */,
 				91663B1225354EE500B3ADD0 /* Info.plist */,
@@ -199,6 +202,7 @@
 				91663B0525354EE300B3ADD0 /* AppDelegate.swift in Sources */,
 				91663B272535512700B3ADD0 /* TypeSelectionViewController.swift in Sources */,
 				91663B0725354EE300B3ADD0 /* SceneDelegate.swift in Sources */,
+				91663B29253557E900B3ADD0 /* TypeSelectionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
