@@ -73,7 +73,7 @@ class TypeSelectionViewController: UIViewController {
             mainTypeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainTypeTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mainTypeTableView.trailingAnchor.constraint(equalTo: view.centerXAnchor),
-            mainTypeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -1),
+            mainTypeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             subTypeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             subTypeTableView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 1),
             subTypeTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -162,7 +162,7 @@ extension TypeSelectionViewController: UITableViewDataSource, UITableViewDelegat
                 let indexPath = IndexPath(row: 0, section: 0)
                 subTypeTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
             } else if viewModel.selectedMainType == .manga {
-                viewModel.selectedSubType = viewModel.mangaSubTypes[0] as? SearchType
+                viewModel.selectedSubType = viewModel.mangaSubTypes[0]
                 subTypeTableView.reloadData()
                 let indexPath = IndexPath(row: 0, section: 0)
                 subTypeTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
@@ -174,7 +174,7 @@ extension TypeSelectionViewController: UITableViewDataSource, UITableViewDelegat
             if viewModel.selectedMainType == .anime {
                 viewModel.selectedSubType = viewModel.animeSubTypes[indexPath.row]
             } else if viewModel.selectedMainType == .manga {
-                viewModel.selectedSubType = viewModel.mangaSubTypes[indexPath.row] as? SearchType
+                viewModel.selectedSubType = viewModel.mangaSubTypes[indexPath.row]
             } else {
                 viewModel.selectedSubType = nil
             }
