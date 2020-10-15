@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class MangaViewController: UIViewController {
 
@@ -159,7 +160,18 @@ extension MangaViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Open web link
+        tableView.deselectRow(at: indexPath, animated: true)
+        let urlString: String
+        if viewModel.mode == .top {
+            urlString = viewModel.allMangas[indexPath.row].url
+        } else {
+            urlString = viewModel.favoriteMangas[indexPath.row].url
+        }
+
+        guard let url = URL(string: urlString) else { return }
+
+        let viewController = SFSafariViewController(url: url)
+        present(viewController, animated: true, completion: nil)
     }
 
 }
