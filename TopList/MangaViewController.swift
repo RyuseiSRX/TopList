@@ -19,6 +19,7 @@ class MangaViewController: UIViewController {
 
     lazy var topTableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(MangaTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +28,7 @@ class MangaViewController: UIViewController {
 
     lazy var favoriteTableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(MangaTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
