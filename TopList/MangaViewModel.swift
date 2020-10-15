@@ -49,7 +49,9 @@ class MangaViewModel {
         let urlString = "https://api.jikan.moe/v3/top/\(mainTypePath)/\(currentPage)/\(subTypePath)"
         guard let url = URL(string: urlString) else { return }
 
-        AF.request(url).responseJSON { [unowned self] response in
+        AF.request(url).responseJSON { [weak self] response in
+            guard let self = self else { return }
+
             guard let data = response.data else {
                 self.delegate?.viewModelLoadItemFailed(self)
                 self.isFetching = false
@@ -87,4 +89,26 @@ class MangaViewModel {
         }
     }
 
+    func addToFavorite(row: Int) {
+        guard row < allMangas.count else { return }
+
+        let manga = allMangas[row]
+        manga.isFavorite = true
+        favoriteMangas.insert(manga, at: 0)
+        delegate?.shouldReloadTableView(self)
+    }
+
+    func removeFavorite(row: Int) {
+        if mode == .top {
+            let manga = allMangas[row]
+            manga.isFavorite = false
+            favoriteMangas.removeAll { $0 == manga }
+        } else {
+            let manga = favoriteMangas[row]
+            manga.isFavorite = false
+            favoriteMangas.remove(at: row)
+        }
+        delegate?.shouldReloadTableView(self)
+    }
+    
 }

@@ -109,7 +109,6 @@ class MangaTableViewCell: UITableViewCell {
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             photoView.heightAnchor.constraint(equalToConstant: 120),
             photoView.widthAnchor.constraint(equalToConstant: 90),
-            photoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
 
             titleLabel.topAnchor.constraint(equalTo: photoView.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 10),

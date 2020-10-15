@@ -24,6 +24,7 @@ class MangaViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = 160
         return tableView
     }()
 
@@ -33,6 +34,7 @@ class MangaViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = 160
         tableView.isHidden = true
         return tableView
     }()
@@ -179,9 +181,23 @@ extension MangaViewController: UITableViewDataSource, UITableViewDelegate {
 extension MangaViewController: MangaTableViewCellDelegate {
 
     func mangaTableViewCellDidAddFavorite(_ cell: MangaTableViewCell) {
+        guard viewModel.mode == .top,
+            let indexPath = topTableView.indexPath(for: cell)
+        else { return }
+
+        viewModel.addToFavorite(row: indexPath.row)
     }
 
     func mangaTableViewCellDidRemoveFavorite(_ cell: MangaTableViewCell) {
+        if viewModel.mode == .top {
+            if let indexPath = topTableView.indexPath(for: cell) {
+                viewModel.removeFavorite(row: indexPath.row)
+            }
+        } else {
+            if let indexPath = favoriteTableView.indexPath(for: cell) {
+                viewModel.removeFavorite(row: indexPath.row)
+            }
+        }
     }
 
 }
