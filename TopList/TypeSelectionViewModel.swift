@@ -122,7 +122,10 @@ class TypeSelectionViewModel {
         }
     }
 
-    private let mainTypes: [MainType] = [.anime, .manga, .people, .characters]
-    private let animeSubTypes: [AnimeSubType] = [.all, .airing, .upcoming, .tv, .movie, .ova, .special, .bypopularity, .favorite]
-    private let mangaSubTypes: [MangaSubType] = [.all, .manga, .novels, .oneshots, .doujin, .manhwa, .manhua, .bypopularity, .favorite]
+    let mainTypes: [MainType] = [.anime, .manga, .people, .characters]
+    let animeSubTypes: [AnimeSubType] = [.all, .airing, .upcoming, .tv, .movie, .ova, .special, .bypopularity, .favorite]
+    let mangaSubTypes: [MangaSubType] = [.all, .manga, .novels, .oneshots, .doujin, .manhwa, .manhua, .bypopularity, .favorite]
+
+    var selectedMainType = MainType.anime
+    var selectedSubType: Any? = AnimeSubType.all
 }
