@@ -78,7 +78,15 @@ class MangaViewController: UIViewController {
             favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        // TODO: Fetch initial data
+        viewModel.fetchTopMangas()
+    }
+
+    func reloadData() {
+        if viewModel.mode == .top {
+            topTableView.reloadData()
+        } else {
+            favoriteTableView.reloadData()
+        }
     }
 
     @objc func filterSegmentedControlValueChanged(_ control: UISegmentedControl) {
@@ -90,12 +98,12 @@ class MangaViewController: UIViewController {
         topTableView.isHidden = viewModel.mode == .favorite
         favoriteTableView.isHidden = viewModel.mode == .top
 
-        // TODO: Reload data
+        reloadData()
     }
 
     @objc func refreshControlValueChanged(_ control: UIRefreshControl) {
         control.beginRefreshing()
-        // TODO: Refresh data
+        viewModel.fetchTopMangas()
     }
 
 }
@@ -103,11 +111,22 @@ class MangaViewController: UIViewController {
 extension MangaViewController: MangaViewModelDelegate {
 
     func viewModelLoadItemFailed(_ viewModel: MangaViewModel) {
-        // TODO: display error message
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+
+        let ok = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: "Error", message: "Failed to load manga list due to network issue. Pull down to refresh", preferredStyle: .alert)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
 
     func shouldReloadTableView(_ viewModel: MangaViewModel) {
-        // TODO: reload data
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+
+        reloadData()
     }
 
 }
@@ -115,16 +134,42 @@ extension MangaViewController: MangaViewModelDelegate {
 extension MangaViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        if viewModel.mode == .top {
+            return viewModel.allMangas.count
+        } else {
+            return viewModel.favoriteMangas.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MangaTableViewCell
+
+        cell.delegate = self
+
+        if viewModel.mode == .top {
+            cell.setup(manga: viewModel.allMangas[indexPath.row])
+            if indexPath.row == viewModel.allMangas.count-1 && viewModel.hasMoreToFetch {
+                viewModel.fetchNextTopMangas()
+            }
+        } else {
+            cell.setup(manga: viewModel.favoriteMangas[indexPath.row])
+        }
+
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Handle favorite actions
+        // TODO: Open web link
+    }
+
+}
+
+extension MangaViewController: MangaTableViewCellDelegate {
+
+    func mangaTableViewCellDidAddFavorite(_ cell: MangaTableViewCell) {
+    }
+
+    func mangaTableViewCellDidRemoveFavorite(_ cell: MangaTableViewCell) {
     }
 
 }

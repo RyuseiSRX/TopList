@@ -142,6 +142,7 @@ class MangaTableViewCell: UITableViewCell {
         startDate.text = nil
         endDate.text = nil
         typeLabel.text = nil
+        typeLabel.isHidden = true
         favoriteButton.isSelected = false
     }
 
@@ -152,7 +153,10 @@ class MangaTableViewCell: UITableViewCell {
         titleLabel.text = manga.title
         startDate.text = "Start Date: " + (manga.startDate ?? "")
         endDate.text = "End Date: " + (manga.endDate ?? "")
-        typeLabel.text = " " + manga.type + " "
+        if let type = manga.type {
+            typeLabel.text = " " + type + " "
+            typeLabel.isHidden = false
+        }
         rankLabel.text = "\(manga.rank)"
         favoriteButton.isSelected = manga.isFavorite
     }

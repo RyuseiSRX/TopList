@@ -14,7 +14,7 @@ class Manga: Codable, Equatable {
     var startDate: String?
     var endDate: String?
     var rank: Int
-    var type: String
+    var type: String?
     var url: String
     var isFavorite = false
 

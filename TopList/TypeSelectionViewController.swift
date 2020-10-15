@@ -83,7 +83,10 @@ class TypeSelectionViewController: UIViewController {
     }
 
     @objc func doneButtonTouched(_ sender: UIBarButtonItem) {
-
+        let mangaViewModel = MangaViewModel(mainTypePath: viewModel.selectedMainType.apiPath,
+                                            subTypePath: viewModel.selectedSubType?.apiPath ?? "")
+        let mangaViewController = MangaViewController(viewModel: mangaViewModel)
+        navigationController?.pushViewController(mangaViewController, animated: true)
     }
 
 }
@@ -159,7 +162,7 @@ extension TypeSelectionViewController: UITableViewDataSource, UITableViewDelegat
                 let indexPath = IndexPath(row: 0, section: 0)
                 subTypeTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
             } else if viewModel.selectedMainType == .manga {
-                viewModel.selectedSubType = viewModel.mangaSubTypes[0]
+                viewModel.selectedSubType = viewModel.mangaSubTypes[0] as? SearchType
                 subTypeTableView.reloadData()
                 let indexPath = IndexPath(row: 0, section: 0)
                 subTypeTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
@@ -171,7 +174,7 @@ extension TypeSelectionViewController: UITableViewDataSource, UITableViewDelegat
             if viewModel.selectedMainType == .anime {
                 viewModel.selectedSubType = viewModel.animeSubTypes[indexPath.row]
             } else if viewModel.selectedMainType == .manga {
-                viewModel.selectedSubType = viewModel.mangaSubTypes[indexPath.row]
+                viewModel.selectedSubType = viewModel.mangaSubTypes[indexPath.row] as? SearchType
             } else {
                 viewModel.selectedSubType = nil
             }

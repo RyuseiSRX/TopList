@@ -8,9 +8,14 @@
 
 import Foundation
 
+protocol SearchType {
+    var title: String { get }
+    var apiPath: String { get }
+}
+
 class TypeSelectionViewModel {
 
-    enum MainType: String {
+    enum MainType: String, SearchType {
         case anime
         case manga
         case people
@@ -34,7 +39,7 @@ class TypeSelectionViewModel {
         }
     }
 
-    enum AnimeSubType: String {
+    enum AnimeSubType: String, SearchType {
         case all
         case airing
         case upcoming
@@ -78,7 +83,7 @@ class TypeSelectionViewModel {
         }
     }
 
-    enum MangaSubType: String {
+    enum MangaSubType: String, SearchType {
         case all
         case manga
         case novels
@@ -127,5 +132,5 @@ class TypeSelectionViewModel {
     let mangaSubTypes: [MangaSubType] = [.all, .manga, .novels, .oneshots, .doujin, .manhwa, .manhua, .bypopularity, .favorite]
 
     var selectedMainType = MainType.anime
-    var selectedSubType: Any? = AnimeSubType.all
+    var selectedSubType: SearchType? = AnimeSubType.all
 }
